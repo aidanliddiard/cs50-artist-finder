@@ -1,13 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useGetEvents } from './lib/api-hooks';
+import { FetchState } from './types';
 
 function App() {
+  const [events, fetchState, getEvents] = useGetEvents()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Helloworld!</h1>
-      </header>
+      {
+        fetchState === FetchState.DEFAULT && <button onClick={getEvents}>Get Events</button>
+      }
+      {fetchState === FetchState.LOADING && <p>Loading...</p>}
+      {fetchState === FetchState.ERROR && <p>There was an error</p>}
+      {fetchState === FetchState.SUCCESS && (
+        console.log(events),
+        <ul>
+          {events.map((event) => (
+            <li key={event.id}>
+              <h2>{event.name}</h2>
+              <p>{event.dates.start.localDate} at {event.dates.start.localTime}</p>
+              <p>{event.url}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
