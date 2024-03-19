@@ -28,4 +28,8 @@ export type EventData = {
     // id: string;
 }
 
-export {};
+export type ArtistData = {
+    id: string;
+    name: string;
+    genres: Array<string>;
+}
