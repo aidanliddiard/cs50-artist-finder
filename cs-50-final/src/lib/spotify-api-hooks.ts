@@ -34,10 +34,11 @@ export function useGetSimilarArtists() {
         }   
     }
 
-    const getArtistId = async () => {
+    const getArtistId = async (artist: string) => {
+        // if (!artist) return;
         try {
             const accessToken = await getAccessToken();
-            const resp = await axios.get(`https://api.spotify.com/v1/search?q=Noah+Kahan&type=artist`, {
+            const resp = await axios.get(`https://api.spotify.com/v1/search?q=${artist}&type=artist`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 }
@@ -51,12 +52,12 @@ export function useGetSimilarArtists() {
         }
     }
 
-    const getSimilarArtists = async () => {
+    const getSimilarArtists = async (artist: string) => {
         try {
             setFetchStateArtists(FetchState.LOADING);
             
             const accessToken = await getAccessToken();
-            const artistId = await getArtistId();
+            const artistId = await getArtistId(artist);
             const resp = await axios.get(`https://api.spotify.com/v1/artists/${artistId}/related-artists`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
