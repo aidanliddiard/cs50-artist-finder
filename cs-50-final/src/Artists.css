@@ -17,9 +17,11 @@
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    height: 40px;
 }
 .inputGroup {
     display: flex;
     flex-direction: column;
+  }
+  svg {
+    height: 30px;
   }
