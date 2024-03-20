@@ -22,14 +22,12 @@ export type EventData = {
     accessibility: {
         info: string;
     }
-
-    // name: string;
-    // url: string;
-    // id: string;
 }
 
 export type ArtistData = {
     id: string;
     name: string;
     genres: Array<string>;
+    followers: {total: BigInt};
+    images: Array<{url: string, height: BigInt, width: BigInt}>;
 }
