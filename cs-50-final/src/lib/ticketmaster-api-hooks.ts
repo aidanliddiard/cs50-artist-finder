@@ -25,5 +25,3 @@ export function useGetEvents() {
 
     return [events, fetchStateEvents, getEvents] as const;
 }
-
-// export{}

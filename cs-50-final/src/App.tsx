@@ -15,7 +15,6 @@ function App() {
       {fetchStateEvents === FetchState.LOADING && <p>Loading...</p>}
       {fetchStateEvents === FetchState.ERROR && <p>There was an error</p>}
       {fetchStateEvents === FetchState.SUCCESS && (
-        console.log(events),
         <ul>
           {events.map((event) => (
             <li key={event.id}>
@@ -32,7 +31,6 @@ function App() {
       {fetchStateArtists === FetchState.LOADING && <p>Loading...</p>}
       {fetchStateArtists === FetchState.ERROR && <p>There was an error</p>}
       {fetchStateArtists === FetchState.SUCCESS && (
-        console.log(artists),
           <ul>
           {artists.map((artist) => (
             <li key={artist.id}>
