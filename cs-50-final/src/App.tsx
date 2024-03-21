@@ -2,16 +2,16 @@ import './App.css';
 // import { useGetSimilarArtists } from './lib/spotify-api-hooks';
 // import { useGetEvents } from './lib/ticketmaster-api-hooks';
 // import { FetchState } from './types';
-import Artists from './Artists';
+import Artists from './views/Artists';
 
 function App() {
-//   const [events, fetchStateEvents, getEvents] = useGetEvents()
-//   const [artists, fetchStateArtists, getSimilarArtists] = useGetSimilarArtists()
+  //   const [events, fetchStateEvents, getEvents] = useGetEvents()
+  //   const [artists, fetchStateArtists, getSimilarArtists] = useGetSimilarArtists()
 
   return (
     <div className="App">
-        <h1>Explore New Music</h1>
-        <Artists />
+      <h1>Explore New Music</h1>
+      <Artists />
       {/* {
         fetchStateEvents === FetchState.DEFAULT && <button onClick={getEvents}>Get Events</button>
       }
@@ -28,10 +28,8 @@ function App() {
           ))}
         </ul>
       )} */}
-     
     </div>
   );
 }
 
 export default App;
-
