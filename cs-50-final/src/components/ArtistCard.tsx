@@ -10,7 +10,7 @@ function ArtistCard({ artist }: ArtistCardProps) {
   console.log(artist);
   return (
     <Card className="artistCard" style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={artist.images[0].url} alt={artist.name} />
+      <Card.Img variant="top" src={artist.images[0].url} alt="" />
       <Card.Body>
         <Card.Title>{artist.name}</Card.Title>
       </Card.Body>
