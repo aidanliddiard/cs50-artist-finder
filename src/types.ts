@@ -31,3 +31,13 @@ export type ArtistData = {
   followers: { total: BigInt };
   images: Array<{ url: string; height: BigInt; width: BigInt }>;
 };
+
+export type ArtistDetails = {
+  id: string;
+  name: string;
+  genres: Array<string>;
+  followers: { total: BigInt };
+  images: Array<{ url: string; height: BigInt; width: BigInt }>;
+  popularity: number;
+  external_urls: { spotify: string };
+};
