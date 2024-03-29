@@ -3,6 +3,7 @@ export enum FetchState {
   LOADING = 'LOADING',
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
+  NONE = 'NONE',
 }
 
 export type EventData = {

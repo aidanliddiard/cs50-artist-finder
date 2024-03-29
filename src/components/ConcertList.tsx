@@ -12,6 +12,12 @@ function ConcertList({ name }: ConcertProps) {
     getEvents(name ?? '');
   }, []);
 
+  console.log('events', events);
+  console.log(
+    'embedded',
+    events.map((event) => event._embedded)
+  );
+
   const options: Intl.DateTimeFormatOptions = {
     weekday: 'long',
     year: 'numeric',
@@ -24,24 +30,37 @@ function ConcertList({ name }: ConcertProps) {
       <h1>Concert List</h1>
       {fetchStateEvents === FetchState.LOADING && <p>Loading...</p>}
       {fetchStateEvents === FetchState.ERROR && <p>There was an error</p>}
+      {fetchStateEvents === FetchState.NONE && <p>No events found</p>}
       {fetchStateEvents === FetchState.SUCCESS && (
-        <ul>
+        // <ul>
+        <>
           {events.map((event) => (
-            <li key={event.id}>
-              <h2>{event.name}</h2>
-              <h3>{event._embedded.venues[0].city.name}</h3>
-              <h4>{event._embedded.venues[0].name}</h4>
-              <p>
-                {new Date(event.dates.start.localDate).toLocaleDateString(
-                  'en-US',
-                  options
-                )}{' '}
-                at {event.dates.start.localTime}
-              </p>
-              <a href={event.url}>Link to Ticketmaster</a>
-            </li>
+            <div key={event.id}>
+              {event.url && (
+                <>
+                  <h2>{event.name}</h2>
+                  {event._embedded &&
+                    event._embedded.venues &&
+                    event._embedded.venues[0] && (
+                      <>
+                        <h3>{event._embedded.venues[0].city.name}</h3>
+                        <h4>{event._embedded.venues[0].name}</h4>
+                      </>
+                    )}
+                  <p>
+                    {new Date(event.dates.start.localDate).toLocaleDateString(
+                      'en-US',
+                      options
+                    )}{' '}
+                    at {event.dates.start.localTime}
+                  </p>
+                  <a href={event.url}>Link to Ticketmaster</a>
+                </>
+              )}
+            </div>
           ))}
-        </ul>
+        </>
+        // </ul>
       )}
     </div>
   );

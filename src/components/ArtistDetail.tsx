@@ -31,12 +31,18 @@ function ArtistDetail({ id }: ArtistDetailProps) {
             {artistDetails.genres[0] ? (
               <>
                 <p id="Genres">Genres:</p>
-                <ul aria-labelledby="Generes">
+                <ul aria-labelledby="Genres">
                   {artistDetails.genres.map((genre, index) => (
                     <li key={index}>{genre}</li>
                   ))}
                 </ul>
-                <a href={artistDetails.external_urls.spotify}>Spotify</a>
+                <a
+                  href={artistDetails.external_urls.spotify}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Listen on Spotify
+                </a>
               </>
             ) : null}
           </Card.Text>

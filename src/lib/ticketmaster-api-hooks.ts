@@ -16,6 +16,10 @@ export function useGetEvents() {
         `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${artistName}&apikey=${API_KEY}`
       );
       console.log('resp', resp);
+      if (resp.data._embedded === undefined) {
+        setFetchStateEvents(FetchState.NONE);
+        return;
+      }
       const data = resp.data._embedded.events as Array<EventData>;
 
       setEvents(data);
