@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import { useState } from 'react';
-import { ArtistData, FetchState } from '../types';
+import { ArtistData, FetchState, ArtistDetails } from '../types';
 
 const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
@@ -12,15 +12,9 @@ export function useGetSimilarArtists() {
     FetchState.DEFAULT
   );
   const [artists, setArtists] = useState<Array<ArtistData>>([]);
-  //   const [artistDetails, setArtistsDetails] = useState<ArtistDetails>({
-  //     id: '',
-  //     name: '',
-  //     genres: [],
-  //     followers: { total: BigInt(0) },
-  //     images: [],
-  //     popularity: 0,
-  //     external_urls: { spotify: '' },
-  //   });
+  const [artistDetails, setArtistsDetails] = useState<ArtistDetails | null>(
+    null
+  );
 
   const getAccessToken = async () => {
     const data = qs.stringify({
@@ -45,8 +39,29 @@ export function useGetSimilarArtists() {
     }
   };
 
+  const getArtistDetails = async (id: string) => {
+    console.log('artistId', id);
+    if (!id) return;
+    try {
+      const accessToken = await getAccessToken();
+      const resp = await axios.get(`https://api.spotify.com/v1/artists/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = resp.data as ArtistDetails;
+      console.log('data', data);
+      setArtistsDetails(data);
+      setFetchStateArtists(FetchState.SUCCESS);
+    } catch (err) {
+      setFetchStateArtists(FetchState.ERROR);
+    }
+  };
+
   const getArtistId = async (artist: string) => {
-    // if (!artist) return;
+    if (!artist) {
+      throw new Error('Artist is undefined');
+    }
     try {
       const accessToken = await getAccessToken();
       const resp = await axios.get(
@@ -57,7 +72,7 @@ export function useGetSimilarArtists() {
           },
         }
       );
-      console.log('hello', resp);
+      console.log('resp', resp);
       const data = resp.data.artists.items[0].id;
 
       return data;
@@ -65,26 +80,6 @@ export function useGetSimilarArtists() {
       console.log(err);
     }
   };
-
-  //   const getArtistDetails = async (artistId: string) => {
-  //     try {
-  //       const accessToken = await getAccessToken();
-  //       const resp = await axios.get(
-  //         `https://api.spotify.com/v1/artists/${artistId}`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${accessToken}`,
-  //           },
-  //         }
-  //       );
-  //       const data = resp.data as ArtistDetails;
-  //       console.log(data);
-  //       setArtistsDetails(data);
-  //       setFetchStateArtists(FetchState.SUCCESS);
-  //     } catch (err) {
-  //       setFetchStateArtists(FetchState.ERROR);
-  //     }
-  //   };
 
   const getSimilarArtists = async (artist: string) => {
     try {
@@ -109,5 +104,11 @@ export function useGetSimilarArtists() {
     }
   };
 
-  return [artists, fetchStateArtists, getSimilarArtists] as const;
+  return [
+    artists,
+    fetchStateArtists,
+    getSimilarArtists,
+    artistDetails,
+    getArtistDetails,
+  ] as const;
 }

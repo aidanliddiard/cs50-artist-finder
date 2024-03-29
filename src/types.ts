@@ -22,6 +22,14 @@ export type EventData = {
   accessibility: {
     info: string;
   };
+  _embedded: {
+    venues: Array<{
+      name: string;
+      city: {
+        name: string;
+      };
+    }>;
+  };
 };
 
 export type ArtistData = {

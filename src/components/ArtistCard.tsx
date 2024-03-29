@@ -10,25 +10,17 @@ interface ArtistCardProps {
 function ArtistCard({ artist }: ArtistCardProps) {
   console.log(artist);
   return (
-    <Link to={`/artist/${artist.id}/${artist.name}`}>
+    <Link to={`/artist/${artist.id}/${artist.name}`} className="linkStyle">
       <Card className="artistCard" style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={artist.images[0].url} alt="" />
+        <Card.Img
+          variant="top"
+          className="artistImage"
+          src={artist.images[0].url}
+          alt=""
+        />
         <Card.Body>
           <Card.Title>{artist.name}</Card.Title>
         </Card.Body>
-        <Card.Text>
-          <p>Followers: {artist.followers.total.toString()}</p>
-          {artist.genres[0] ? (
-            <>
-              <p>Genres:</p>
-              <ul>
-                {artist.genres.map((genre, index) => (
-                  <li key={index}>{genre}</li>
-                ))}
-              </ul>
-            </>
-          ) : null}
-        </Card.Text>
       </Card>
     </Link>
   );
