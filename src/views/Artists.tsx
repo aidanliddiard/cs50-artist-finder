@@ -48,13 +48,19 @@ function Artists() {
       {fetchStateArtists === FetchState.LOADING && <p>Loading...</p>}
       {fetchStateArtists === FetchState.ERROR && <p>There was an error</p>}
       {fetchStateArtists === FetchState.SUCCESS && (
-        <ul className="artistList">
-          {artists.map((artist) => (
-            <li key={artist.id}>
-              <ArtistCard artist={artist} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <h2>Artists similar to {search}</h2>
+          <h4>
+            Click on an artist to see their details and upcoming concerts.
+          </h4>
+          <ul className="artistList">
+            {artists.map((artist) => (
+              <li key={artist.id}>
+                <ArtistCard artist={artist} />
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </>
   );

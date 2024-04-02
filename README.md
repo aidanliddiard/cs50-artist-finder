@@ -1,4 +1,4 @@
-# YOUR PROJECT TITLE
+# Explore New Music
 
 ## Video Demo: URL
 
@@ -18,7 +18,7 @@ A goal for this project was level AAA of conformance with the Web Content Access
 
 I ultimately decided to not build a backend and instead relied on two APIs: Spotify’s Web API and Ticketmaster’s Discovery API. I use Spotify's Web API to fetch an artist's related artists and details about a specific artist. I used Ticketmaster's Discovery API to fetch events with that specific artist.
 
-#### File Architecture:
+### File Architecture:
 
 In my source folder I have a components, lib, and views folder where the majority of my code is. In components folder I have the Typescript files ArtistCard.tsx, ArtistDetail.tsx, ConcertList.tsx, and Footer.tsx. In my lib folder I have my spotify-api-hooks.ts and ticketmaster-api-hooks.ts. Finally in the views folder I have Artists.tsx and Detail.tsx as well as corresponding .css files which are imported to each respectively. Both Artists.tsx and Detail.tsx are routes in App.tsx where Artists is the home page and Detail is the page that displays the details when you click on a specific artist card. Note moving forward I will be dropping .tsx/.ts/.css from the file names.
 
@@ -28,9 +28,9 @@ When a user clicks on an artist card they are redirected to the detail page at /
 
 Detail has a button to return to the home page and the ArtistDetail and ConcertList components where the id and name are passed as props to each respectively. The ArtistDetail component has a useEffect that calls the getArtistDetails() function on page load and displays a card with the artist details including a link to Spotify to listen to the artist’s music. The ConcertList also has a useEffect that calls getEvents() and when successful displays the list of concerts for the artist.
 
-The spotify-api-hooks file has two main functions getSimilarArtists() and getArtistDetails(). For each, there is a helper function called getAccessTokent that is called for the API call to be successful. When calling getSimilarArtist() there is an additional helper function called getArtistId() so that when a user searches a name the id is fetched to then hit the endpoint with the id to fetch the related artists. The ticketmaster-api-hooks only has one function named getEvents() that uses the artist’s name as a parameter to search for events with that artist. I also included a .env.local file to store my client id and secrets and then imported them to both spotify-api-hooks and ticketmaster-api-hooks.
+The spotify-api-hooks file has two main functions getSimilarArtists() and getArtistDetails(). For each, there is a helper function called getAccessTokent that is called for the API call to be successful. When calling getSimilarArtist() there is an additional helper function called getArtistId() so that when a user searches a name the id is fetched to then hit the endpoint with the id to fetch the related artists. The ticketmaster-api-hooks only has one function named getEvents() that uses the artist’s name as a parameter to search for events with that artist. I also included a .env.local file to store my client id and secrets and then imported them to both spotify-api-hooks and ticketmaster-api-hooks. Finally, types.ts is where I stored the FetchState enumeration and defined the EventData and ArtistData types.
 
-#### Tools:
+### Tools:
 
 - GitHub Copilot
 - Bootstrap
