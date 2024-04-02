@@ -9,15 +9,17 @@ function App() {
   return (
     <>
       <div className="App">
-        <BrowserRouter>
-          <h1>Explore New Music</h1>
-          <Routes>
-            <Route path="/artist/:id/:name" element={<Detail />} />
-            <Route path="/" element={<Artists />} />
-          </Routes>
-        </BrowserRouter>
+        <div className="Content">
+          <BrowserRouter>
+            <h1>Explore New Music</h1>
+            <Routes>
+              <Route path="/artist/:id/:name" element={<Detail />} />
+              <Route path="/" element={<Artists />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }
