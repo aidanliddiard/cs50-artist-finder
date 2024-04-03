@@ -3,6 +3,7 @@ export enum FetchState {
   LOADING = 'LOADING',
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
+  NONE = 'NONE',
 }
 
 export type EventData = {
@@ -22,6 +23,14 @@ export type EventData = {
   accessibility: {
     info: string;
   };
+  _embedded: {
+    venues: Array<{
+      name: string;
+      city: {
+        name: string;
+      };
+    }>;
+  };
 };
 
 export type ArtistData = {
@@ -30,4 +39,14 @@ export type ArtistData = {
   genres: Array<string>;
   followers: { total: BigInt };
   images: Array<{ url: string; height: BigInt; width: BigInt }>;
+};
+
+export type ArtistDetails = {
+  id: string;
+  name: string;
+  genres: Array<string>;
+  followers: { total: BigInt };
+  images: Array<{ url: string; height: BigInt; width: BigInt }>;
+  popularity: number;
+  external_urls: { spotify: string };
 };

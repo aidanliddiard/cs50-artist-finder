@@ -5,3 +5,20 @@
     justify-content: center;
     margin: 10px;
 }
+
+
+.linkStyle:hover, .linkStyle:focus{
+    color: red;
+    cursor: pointer;
+    outline: 0.2em solid hsl(219deg 63% 44%);
+    outline-offset: 0.2em;
+}
+
+.linkStyle {
+    text-decoration: none;
+}
+.artistImage {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+  }
